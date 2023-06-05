@@ -1,19 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-    <title type="text">Hugo Theme MemE</title>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="zh">
+    <title type="text">坐看风起</title>
     <subtitle type="html">MemE is a powerful and highly customizable GoHugo theme for personal blogs.</subtitle>
-    <updated>2023-06-05T11:26:08&#43;08:00</updated>
-    <id>https://example.com/</id>
-    <link rel="alternate" type="text/html" href="https://example.com/" />
-    <link rel="self" type="application/atom&#43;xml" href="https://example.com/atom.xml" />
+    <updated>2023-06-05T14:33:11&#43;08:00</updated>
+    <id>https://wangruihuano.github.io/</id>
+    <link rel="alternate" type="text/html" href="https://wangruihuano.github.io/" />
+    <link rel="self" type="application/atom&#43;xml" href="https://wangruihuano.github.io/atom.xml" />
     <author>
             <name>reuixiy</name>
-            <uri>https://example.com/</uri>
+            <uri>https://wangruihuano.github.io/</uri>
             
                 <email>reuixiy@gmail.com</email>
             </author>
     <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</rights>
     <generator uri="https://gohugo.io/" version="0.80.0">Hugo</generator>
+        <entry>
+            <title type="text">Customize Chatgpt Llm Embeddings</title>
+            <link rel="alternate" type="text/html" href="https://wangruihuano.github.io/posts/customize-chatgpt-llm-embeddings/" />
+            <id>https://wangruihuano.github.io/posts/customize-chatgpt-llm-embeddings/</id>
+            <updated>2023-06-05T14:26:06&#43;08:00</updated>
+            <published>2023-06-05T14:20:08&#43;08:00</published>
+            <author>
+                    <name>reuixiy</name>
+                    <uri>https://io-oi.me/</uri>
+                    <email>reuixiy@gmail.com</email>
+                    </author>
+            <rights>[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)</rights><summary type="html">Large language models (LLMs) like GPT-4 and ChatGPT can generate high-quality text that is useful for many applications, including chatbots, language translation, and content creation. However, these models are limited to the information contained within their training datasets.
+If you prompt ChatGPT about something contained within your own organization’s documents, it will provide an inaccurate response.</summary>
+            
+                <content type="html">&lt;p&gt;Large language models (&lt;a href=&#34;https://bdtechtalks.com/tag/large-language-models/&#34;&gt;LLMs&lt;/a&gt;) like GPT-4 and ChatGPT can generate high-quality text that is useful for many applications, including chatbots, language translation, and content creation. However, these models are limited to the information contained within their training datasets.&lt;/p&gt;
+&lt;p&gt;If you prompt &lt;a href=&#34;https://bdtechtalks.com/2022/12/05/openai-chatgpt/&#34;&gt;ChatGPT&lt;/a&gt; about something contained within your own organization’s documents, it will provide an inaccurate response. This can be problematic if you are working on an application where the language is highly technical or domain-specific.&lt;/p&gt;
+&lt;p&gt;To solve this problem, we can augment our LLMs with our own custom documents. In this article, I will show you a framework to give context to ChatGPT or &lt;a href=&#34;https://bdtechtalks.com/2023/03/20/gpt-4-applications-limits/&#34;&gt;GPT-4&lt;/a&gt; (or any other LLM) with your own data by using document embeddings.&lt;/p&gt;
+&lt;h2 id=&#34;providing-context-to-language-models&#34;&gt;Providing context to language models&lt;/h2&gt;
+&lt;p&gt;Language models are context sensitive. If you give them a plain prompt, they will respond based on the knowledge they have extracted from their training data. But if you prepend your prompt with custom information, you can modify their behavior.&lt;/p&gt;
+&lt;p&gt;For example, if you ask ChatGPT the question, “What are the risks of using run rate?” it will provide a long answer (which is not bad).&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://i0.wp.com/bdtechtalks.com/wp-content/uploads/2023/05/chatgpt-what-is-run-rate.png?ssl=1&#34;&gt;&lt;img src=&#34;https://i0.wp.com/bdtechtalks.com/wp-content/uploads/2023/05/chatgpt-what-is-run-rate.png?resize=666%2C768&amp;amp;ssl=1&#34; alt=&#34;chatgpt what is run rate&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;However, you can prompt ChatGPT to provide the answer from a specific document. In the following example, I ask ChatGPT the same question, but I prepend my prompt with “Answer my questions based on the following document:” followed by the text of an article from Investopedia about run rate. This time, ChatGPT provides a different answer, extracted from the article’s text.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://i0.wp.com/bdtechtalks.com/wp-content/uploads/2023/05/Giving-ChatGPT-context.png?ssl=1&#34;&gt;&lt;img src=&#34;https://i0.wp.com/bdtechtalks.com/wp-content/uploads/2023/05/Giving-ChatGPT-context.png?resize=696%2C510&amp;amp;ssl=1&#34; alt=&#34;img&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://i0.wp.com/bdtechtalks.com/wp-content/uploads/2023/05/ChatGPT-context-aware-response.png?ssl=1&#34;&gt;&lt;img src=&#34;https://i0.wp.com/bdtechtalks.com/wp-content/uploads/2023/05/ChatGPT-context-aware-response.png?resize=696%2C704&amp;amp;ssl=1&#34; alt=&#34;img&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The value of this technique is evident, especially in applications where context is very important. However, manually adding context to your prompts is not practical, especially when you have thousands of documents.&lt;/p&gt;
+&lt;p&gt;Say you have a website that has thousands of pages with rich content on financial topics and you want to create a chatbot based on the ChatGPT API that can help users navigate this content. You need a systematic approach to match users’ prompts with the right pages and use the LLM to provide context-aware responses. This is where document embeddings can help.&lt;/p&gt;
+&lt;h2 id=&#34;using-embeddings-to-capture-semantics&#34;&gt;Using embeddings to capture semantics&lt;/h2&gt;
+&lt;p&gt;Before we get into embeddings, let’s create a high-level framework for our chatbot:&lt;/p&gt;
+&lt;p&gt;1- The user enters a prompt
+2- Retrieve the best document that is relevant to the prompt
+3- Create a new prompt that includes the user’s question as well as the context from the document
+4- Give the newly crafted prompt to the language model
+5- Return the answer to the user&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://i0.wp.com/bdtechtalks.com/wp-content/uploads/2023/05/context-aware-prompt-for-chatgpt.jpg?ssl=1&#34;&gt;&lt;img src=&#34;https://i0.wp.com/bdtechtalks.com/wp-content/uploads/2023/05/context-aware-prompt-for-chatgpt.jpg?resize=696%2C435&amp;amp;ssl=1&#34; alt=&#34;context-aware prompt for chatgpt&#34;&gt;&lt;/a&gt;Providing context to ChatGPT&lt;/p&gt;
+&lt;p&gt;From a programming standpoint, this process is straightforward except for step 2. How do we decide which document is relevant to the user’s query? A rudimentary answer would be to use classic indexing and keyword search. A better solution is to use embeddings.&lt;/p&gt;
+&lt;p&gt;An embedding is a numerical vector—a list of numbers—that captures the different features of a piece of information. The more dimensions the embedding has, the more features it can learn.&lt;/p&gt;
+&lt;iframe loading=&#34;lazy&#34; src=&#34;https://bdtechtalks.substack.com/embed&#34; width=&#34;100%&#34; height=&#34;250&#34; frameborder=&#34;0&#34; scrolling=&#34;no&#34; style=&#34;box-sizing: border-box; max-width: 100%; border: 1px solid rgb(238, 238, 238); background: white;&#34;&gt;&lt;/iframe&gt;
+&lt;p&gt;You can use embeddings for different types of data. For example, in image-related tasks, embeddings can represent the presence or absence of different objects, the intensity of different colors, the distance between different objects, etc.&lt;/p&gt;
+&lt;p&gt;In text, embeddings capture different semantical aspects of texts. For example, word embeddings might contain information about whether the word relates to a city or country, a species of animals, a sports activity, a political concept, etc. In the same sense, phrase embeddings create a numerical representation of the content of a sequence of words. By measuring the distance between two embedding vectors, you can obtain the similarity of their corresponding content.&lt;/p&gt;
+&lt;p&gt;You create embeddings by training a machine learning model—usually a &lt;a href=&#34;https://bdtechtalks.com/2021/01/28/deep-learning-explainer/&#34;&gt;deep neural network&lt;/a&gt;—on a large dataset of examples. In many cases, the embedding model is a modified version of the same model used for the final application (e.g., text generation or image classification).&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://i0.wp.com/bdtechtalks.com/wp-content/uploads/2023/05/embeddings.jpg?ssl=1&#34;&gt;&lt;img src=&#34;https://i0.wp.com/bdtechtalks.com/wp-content/uploads/2023/05/embeddings.jpg?resize=696%2C435&amp;amp;ssl=1&#34; alt=&#34;embeddings&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;creating-an-embedding-database-for-our-documents&#34;&gt;Creating an embedding database for our documents&lt;/h2&gt;
+&lt;p&gt;To integrate embeddings into your chatbot workflow, you’ll need a database that contains the embeddings of all your documents. If your documents are already available in plain text in a database, then you’re ready to create the embeddings. If not, you’ll need to use some sort of technique such as web scraping with Python Beautiful Soup to extract the text from the web pages. If your documents are PDF files, such as research papers, you’ll need to extract the text from them (you can do this with the Python PyPDF library).&lt;/p&gt;
+&lt;p&gt;To create embeddings for your documents, you can use an online service such as &lt;a href=&#34;https://platform.openai.com/docs/guides/embeddings/what-are-embeddings&#34;&gt;OpenAI’s Embeddings API&lt;/a&gt;. You provide the API with the text of your document, and it returns its embedding. OpenAI’s embeddings are 1,536 dimensions, which is among the largest. Alternatively, you can use other embedding services such as &lt;a href=&#34;https://huggingface.co/blog/getting-started-with-embeddings&#34;&gt;Hugging Face&lt;/a&gt; or your own custom &lt;a href=&#34;https://bdtechtalks.com/2022/05/02/what-is-the-transformer/&#34;&gt;transformer model&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Once you have your embeddings, you must store them in a “vector database.” Vector databases are specialized for embeddings and provide different features, such as querying based on different measures (Euclidean distance, cosine similarity, etc.).&lt;/p&gt;
+&lt;p&gt;A popular open-source vector database is &lt;a href=&#34;https://github.com/facebookresearch/faiss&#34;&gt;Faiss&lt;/a&gt; by Facebook, which provides a rich Python library for hosting your own embedding data. Alternatively, you can use &lt;a href=&#34;https://www.pinecone.io/&#34;&gt;Pinecone&lt;/a&gt;, an online vector database system that abstracts the technical complexities of storing and retrieving embeddings.&lt;/p&gt;
+&lt;p&gt;You now have everything you need to create an LLM application that is customized for your own proprietary data. We can now change the logic of the application as follows:&lt;/p&gt;
+&lt;p&gt;1- The user enters a prompt
+2- Create the embedding for the user prompt
+3- Search the embedding database for the document that is nearest to the prompt embedding
+4- Retrieve the actual text of the document
+5- Create a new prompt that includes the user’s question as well as the context from the document
+6- Give the newly crafted prompt to the language model
+7- Return the answer to the user
+8- Bonus: provide a link to the document where the user can further obtain information&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://i0.wp.com/bdtechtalks.com/wp-content/uploads/2023/05/llm-chatbot-embedding-database.jpg?ssl=1&#34;&gt;&lt;img src=&#34;https://i0.wp.com/bdtechtalks.com/wp-content/uploads/2023/05/llm-chatbot-embedding-database.jpg?resize=696%2C435&amp;amp;ssl=1&#34; alt=&#34;llm chatbot embedding database&#34;&gt;&lt;/a&gt;Using embeddings and a vector database to retrieve relevant documents&lt;/p&gt;
+&lt;p&gt;To avoid creating the entire workflow manually, you can use &lt;a href=&#34;https://python.langchain.com/en/latest/index.html&#34;&gt;LangChain&lt;/a&gt;, a Python library for creating LLM applications. LangChain support different types of LLMs and embeddings, including OpenAI, Cohere, AI21 Labs, as well as open source models. It also supports different vector databases, including Pinecone and FAISS. And it has ready-made templates for different types of applications, including chatbots, question answering, and active agents.&lt;/p&gt;
+&lt;h2 id=&#34;important-considerations-for-embeddings&#34;&gt;Important considerations for embeddings&lt;/h2&gt;
+&lt;p&gt;To make proper use of embeddings with large language models, keep the following considerations in mind:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;– Remain consistent in the embeddings framework you use:&lt;/strong&gt; Make sure you use the same embedding model across the entire application. For example, if you chose OpenAI embeddings, make sure to use the same API and model for creating document embeddings, user prompt embeddings, and searching your vector database. Otherwise, you will get inconsistent results.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;– Token limitations:&lt;/strong&gt; Every LLM has a token limit. For example, ChatGPT can preserve context up to 4,096 tokens. GPT-4 has an 8,000 and 32,000 token limits. Many open source models are limited to 2,048 tokens. This includes the document context, user prompt, and model’s response. Therefore, you have to make sure that your context data doesn’t fill the LLM’s memory. A good rule of thumb is to limit documents to 1,000 tokens. If your document is longer than that, you can break it into several chunks with a bit of overlap (around 100 tokens) between each part.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;– Using multiple documents:&lt;/strong&gt; Your response does not have to be limited to a single document. You can retrieve several documents whose embeddings are similar to the prompt and use them to obtain responses. To make sure you don’t run into token limits, you can prompt the model separately for each document.&lt;/p&gt;
+&lt;h2 id=&#34;why-not-fine-tune-language-models&#34;&gt;Why not fine-tune language models?&lt;/h2&gt;
+&lt;p&gt;Why not fine-tune the LLM instead of using context embeddings? &lt;a href=&#34;https://bdtechtalks.com/2019/06/10/what-is-transfer-learning/&#34;&gt;Fine-tuning&lt;/a&gt; is a good option, and using it will depend on your application and resources. With proper fine-tuning, you can get good results from your LLMs without the need to provide context data, which reduces token and inference costs on paid APIs. However, fine-tuning can be costly and complicated. Using context embeddings is an easy option that can be achieved with minimal costs and effort.&lt;/p&gt;
+&lt;p&gt;Eventually, if you have a good data-collection pipeline, you can improve your system by fine-tuning a model for your purposes.&lt;/p&gt;
+</content>
+            
+            
+            
+            
+            
+                
+                    
+                
+                    
+                
+            
+        </entry>
+    
 </feed>
